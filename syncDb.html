@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>SQL Storage</title>
+  <body>    
+   <br/><br/>
+    <div align="center">
+     <input type="hidden" id="id"/>
+     First name:<input type="text" id="emailId"/><br/>
+     Last name:<input type="text" id="pwd"/><br/>
+     <button onClick="resetForm()">Reset Form</button>
+     <button onClick="updateRecord()">Update</button>
+     <button onClick="insertRecord()">Insert</button>
+        <button onClick="dropTable()">Drop Table</button>
+  	<button onClick="showRecords()">show Records</button>
+     <div id="results"></div>
+    </div>
+  </body>
+  
+    <script> 
+ var results = document.getElementById('results'); 
+ var id = document.getElementById('id');
+ var firstName = document.getElementById('emailId');  
+ var lastName = document.getElementById('pwd');
+ var timeUntil = new Date();
+ //var createStatement = "CREATE TABLE IF NOT EXISTS user_table (ID int(5) NOT NULL AUTO_INCREMENT,NAME varchar(20) DEFAULT NULL,EMAIL_ID varchar(100) NOT NULL,PASSWORD varchar(25) NOT NULL,CREATED_ON timestamp NULL DEFAULT NULL,MODIFIED_ON timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`ID`)";
+ var createStatement = "CREATE TABLE IF NOT EXISTS user_table (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, EMAIL_ID TEXT, PASSWORD TEXT)";
+ 
+ var selectAllStatement = "SELECT * FROM user_table";
+ var insertStatement = "INSERT INTO user_table (EMAIL_ID, PASSWORD) VALUES (?, ?)";
+ var updateStatement = "UPDATE user_table SET EMAIL_ID = ?, PASSWORD = ? WHERE ID = ?";
+ var deleteStatement = "DELETE FROM user_table WHERE ID=?";
+ var dropStatement = "DROP TABLE user_table";
+
+ var db = openDatabase("cloudquestionset", "1.0", "sync db", 200000);
+ var dataset;
+ createTable();
+
+      function onError(tx, error) {
+        alert(error.message);
+      }
+      
+      function showRecords() {
+        results.innerHTML = '';
+        db.transaction(function(tx) {
+          tx.executeSql(selectAllStatement, [], function(tx, result) {
+dataset = result.rows;
+            for (var i = 0, item = null; i < dataset.length; i++) {
+              item = dataset.item(i);
+              results.innerHTML += 
+                  '<li>' + item['PASSWORD'] + ' , ' + item['EMAIL_ID'] + ' <a href="#" onclick="loadRecord('+i+')">edit</a>  ' +  
+ '<a href="#" onclick="deleteRecord('+item['ID']+')">delete</a></li>';
+}
+          });
+        });
+      }
+      
+      function createTable() { 
+        db.transaction(function(tx) {
+          tx.executeSql(createStatement, [], showRecords, onError);
+        });
+      }
+      
+      function insertRecord() {
+        db.transaction(function(tx) {
+          tx.executeSql(insertStatement, [firstName.value, lastName.value], loadAndReset, onError);
+        });
+      }
+      
+ function loadRecord(i) {
+var item = dataset.item(i); 
+        firstName.value = item['EMAIL_ID'];
+lastName.value = item['PASSWORD'];
+id.value = item['ID']; 
+      }
+
+      function updateRecord() {
+        db.transaction(function(tx) {
+          tx.executeSql(updateStatement, [firstName.value, lastName.value, id.value], loadAndReset, onError);
+        }); 
+      }
+      
+      function deleteRecord(id) {
+        db.transaction(function(tx) {
+          tx.executeSql(deleteStatement, [id], showRecords, onError);
+        });
+resetForm();
+      }
+       
+      function dropTable() {
+        db.transaction(function(tx) {
+          tx.executeSql(dropStatement, [], showRecords, onError);
+        });
+resetForm();
+      }
+
+ function loadAndReset(){
+ resetForm();
+ showRecords();
+ }
+
+ function resetForm(){
+firstName.value = '';
+lastName.value = '';
+id.value = ''; 
+ }
+</script>
+</head>
+</html>
+
+
+
+ 
+  
