@@ -1,0 +1,18 @@
+.floater {
+  PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; Z-INDEX: 2; RIGHT: 300px; PADDING-BOTTOM: 0px; BOTTOM: 20px; PADDING-TOP: 0px;
+}
+.floater TD {
+	BORDER-RIGHT: #979797 1px inset; BORDER-TOP: #979797 1px inset; BORDER-LEFT: #979797 1px inset; COLOR: black; BORDER-BOTTOM: #979797 1px inset; FONT-FAMILY: Gill, Helvetica, sans-serif; BACKGROUND-COLOR: white
+}
+.matchedSmartInputItem {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 5px; FONT-SIZE: 0.8em; PADDING-BOTTOM: 1px; MARGIN: 0px; CURSOR: pointer; PADDING-TOP: 5px
+}
+.selectedSmartInputItem {
+	COLOR: white; BACKGROUND-COLOR: #3875d7
+}
+#smartInputResults {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.siwCredit {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 0.7em; PADDING-BOTTOM: 0px; MARGIN: 10px 0px 0px; COLOR: black; PADDING-TOP: 0px
+}
