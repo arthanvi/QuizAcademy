@@ -1,437 +1,324 @@
-<!DOCTYPE html>
-
-<html>
-
-    <head>
-
-        <title>Quiz Academy | Your Buddy in Study</title>
-
-     <link rel="shortcut icon" href="images/icon.gif" type="image/gif" />
-
-        <meta charset="UTF-8">
-
-        <meta name="description" content="" />
-
-        <meta name="copyright" content="" />
-
-        <script type="text/javascript" src="/c_js/ext/jquery.min.js"></script>  <!-- Referring local jquery.min.js -->
-
-        <script type="text/javascript" src="/c_js/ext/kickstart.js"></script>                                  <!-- KICKSTART -->
-
-        <link rel="stylesheet" type="text/css" href="/c_css/ext/kickstart.css" media="all" />                  <!-- KICKSTART -->
-
-        <link rel="stylesheet" type="text/css" href="/c_css/ext/style.css" media="all" />  <!-- CUSTOM STYLES -->
-
-        <link rel="stylesheet" type="text/css" href="includes/ww.css" media="all" /> <!-- QA CUSTOM STYLES -->
-
-        <link rel="stylesheet" type="text/css" href="includes/qa.css" media="all" /> <!-- QA CUSTOM STYLES -->
-
-        <script type="text/javascript" src="includes/global.js"></script>
-
-		<script type="text/javascript" src="includes/cookie.js"></script>
-
-        <script type="text/javascript" src="includes/qa.js"></script>
-
-        <script type="text/javascript" src="templates/activities-board.js"></script>
-
-        <script type="text/javascript" src="includes/quiz.js"></script>
-
-		<script>
-
-            $( document ).ready(function() {
-
-                var a = window.location.toString();
-
-                var quizId = 0; //default value
-
-                var isQuizIdUsed = false; //default value
-
-                if(a.indexOf("?") > -1)
-
-                {
-
-                    var name = a.substring(a.indexOf("?")+1);
-
-                    //alert(name);
-
-                    //save this to cookie and
-
-                    setCookie("quizId",name,1);
-
-                    setCookie("isQuizUsed","N",1);
-
-		      //alert ("qqq"+getCookie("quizId"));
-			alert ("in org" + a);
-
-		      if(a.indexOf(".org") > -1){
-				
-				window.open("http://quizacademy.org","_self");
-			}
-		      else
-                    		window.open("/quizacademy","_self");
-
-             
-                }
-
-				else
-
-                {
-
-                    //set appropriate div to display. // TO-DO
-
-                   //get user details from cookei (for autologin)
-
-                   if(getCookie("userid") != null)
-
-                   {
-
-                       var cookie_uid = getCookie("userid");
-
-                       var cookie_pwd = getCookie("userpwd");
-
-                       //alert(cookie_uid + " - " + cookie_pwd);
-
-                       isAutoLogin = true;
-
-                       aaa(null, cookie_uid, cookie_pwd, 'LOGIN', 'ttt1');
-
-					   //hideMessageBox("",5000);
-
-					   
-
-                   }
-
-					else
-
-				   {
-
-					   //alert('all is well');
-
-				   }
-
-                }
-
-            });
-
-        </script>
-
-    </head>
-
-    <body>
-
-        <!-- header : Start-->
-
-        <div id="global-nav" >
-
-            <nav class="navbar">
-
-            <div id="credentials-panel"  style="postion:fixed;right:0px;">
-
-				<span><label id="usernameDisplay"></label></span>
-
-				<!--<button id="btn_notification" class="blue square"><i class="icon-envelope-alt"></i> Notifications</button>-->
-
-                <button id="loginPanel" class="blue square"><i class="icon-key"></i> Login</button>
-
-                <button id="logOutPanel" class="blue square"><i class="icon-signout"></i> Log Out</button>
-
-            </div>
-
-            <ul>
-
-                <li><a href="http://www.quizacademy.org"><i class="icon-signal"></i> Quiz<span>Academy</span></a></li>
-
-                <!--<li><div id="btn_logo" class="blue">Q</div></li>-->
-
-                <!--<li class="divider"></li>-->
-
-                <li><input id="global-search" type="text" placeholder="Search"/></li>
-
-                <li><i class="icon-search"></i></li>
-
-            
-
-            </ul>
-
-        </nav>    
-
-        </div>
-
-        <!-- header : End-->
-
-        <!-- header : Start-->
-
-        <div id="boardDiv">
-
-            <div id="activity-board" class="callout-top grid clearfix col_7">
-
-                <!--<ul class="tabs">
-
-                    <li><a href="">My DashBoard</a></li>
-
-                    <li><a href="#btn-colors">Parent Dashboard</a></li>
-
-                    <li><a href="#btn-styles">Teacher Dashboard</a></li>
-
-                </ul>-->
-
-                <br><br>
-
-                <div class="col_2"></div>
-
-                <div id="dashboard" class="col_8">
-
-                <!--<h4>Popular Courses</h4><br>
-
-                <ul class="alt">
-
-                    <li><div id="btn_logo" ><label class="col_11"><i class="icon-cogs"></i> Brain Workout</label><label class="col_1"><i class="icon-double-angle-down"></i></label></div></li>
-
-                    <li><div id="btn_logo" class="blue"><i class="icon-cogs"></i> JavaScript</div></li>
-
-                    <li><div id="btn_logo" class="blue"><i class="icon-cogs"></i> CRT</div></li>
-
-                    <li><div id="btn_logo" class="blue"><i class="icon-cogs"></i> CBSE - Class 8</div></li>
-
-                </ul>-->
-
-                </div>
-
-            </div>
-
-            <!--<div id="spliter" class="col_1">ss</div>-->
-
-            <div id="info-board" class="col_5">
-
-                <div class="col_6">
-
-                <!--<h5>Assignments</h5><br>
-
-                <ul class="alt">
-
-                    <li>Apple</li>
-
-                    <li>Banana</li>
-
-                    <li>Orange</li>
-
-                    <li>Pear</li>
-
-                </ul>-->
-
-                </div>
-
-                <div class="col_6">
-
-                <!--<h5>Shared Quizes</h5><br>
-
-                <ul class="alt">
-
-                    <li>Apple</li>
-
-                    <li>Banana</li>
-
-                    <li>Orange</li>
-
-                    <li>Pear</li>
-
-                </ul>-->
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div id="brandingDiv" class="col_12">
-
-            <div class="grid col_12">
-
-                <div><ul><h1><i class="icon-signal"></i> QUIZ <span>ACADEMY </span><sup><font size="5">(&beta;eta)</font></sup></h1></ul></div>
-
-                <div><h4>your buddy in study</h4><br><hr></div>
-
-            </div>
-
-            <div class="col_12">
-
-                <button id="goToSignUp" class="blue pill"><i class="icon-signin"></i> Sign Up - Its Free</button>&nbsp;&nbsp;&nbsp;
-
-                <button id="guestLogin" class="blue pill" onclick="autoLogin('GUEST')"><i class="icon-coffee"></i> Login As Guest</button>
-
-            </div>
-
-        </div>
-
-		<div id="messageDiv" class="notice success" style="position:fixed; border:1px solid black; left:-300px; margin-top:50px">message
-
-		</div>
-
-		<div id="syncIndicator" style="position:fixed; left:0px; margin-top:50px; display:none"><img height="40px" width="40px" src="images/ajaxLoaderCy.gif" />
-
-		</div>
-
-        
-
-<!--------------------------------Floating Divs defined here---------------------------------->
-
-        <div id="loginWidget" style="display:none;right:0">
-
-            <label id="closeCross" class="icon-remove"></label>
-
-		<div id="login">
-
-                <!--<a href="#close" class="icon-remove"></a>-->
-
-				<table border="0" cellspacing="10" maxwidth="300">
-
-                    <tr>
-
-						<td colspan="2"><center><h4>Login</h4></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="email" id="emailForLogin" placeholder="Email Id" size="39"/></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="password" id="pwdForLogin" placeholder="Password" size="39"/></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="checkbox" id="RememberPwdForLogin" value="1"> Remember my Password</td>
-
-					</tr>
-
-					<tr><td id="ttt1" colspan="2" style="display:none"></td></tr>
-
-					<tr>
-
-						<td colspan="2"><center><button id="btnLogin" class="blue large" onclick="validateBeforeLogin('LOGIN','ttt1')">
-
-                            <i class="icon-chevron-right"></i> Login</button></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td><center><button id="btnSignUp" class="blue" onclick="showSignUpForm()">Sign Up</button></center></td>
-
-						<td><center><button id="btnForgotPwd" class="blue" onclick="showForgotPwdForm()">Forgot Password</button></center></td>
-
-					</tr>
-
-				</table>      
-
-		</div>
-
-		
-
-		<div id="signUp" style="display:none">
-
-				<table border="0" cellspacing="10" width="300">
-
-                     <tr>
-
-						<td colspan="2"><center><h4>Sign Up</h4></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="name" id="nameForSignUp" placeholder="Name" size="39" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="email" id="emailForSignUp" placeholder="Email Id" size="39" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="password" id="pwdForSignUP" placeholder="Password" size="39" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="password" id="confirmPwdForSignUp" placeholder="Confirm Password" size="39" /></td>
-
-					</tr>
-
-					<tr><td id="ttt2" style="display:none" colspan="2"></td></tr>
-
-					<tr>
-
-						<td colspan="2"><center><button id="btnSignUp" class="blue large" onclick="validateBeforeSignUp('SIGNUP','ttt2')"><i class="icon-chevron-right"></i> Sign Up</button></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td><center><button id="btnBackToLoginFromSignUp" class="blue" onclick="backToLogin()" > Login</button></center></td>
-
-                        <td><center><button id="btnForgotPwd" class="blue" onclick="showForgotPwdForm()">Forgot Password</button></center></td>
-
-					</tr>
-
-				</table>
-
-		</div>
-
-		
-
-		<div id="forgotPwd" style="display:none">
-
-				<table border="0" cellspacing="10" width="300">
-
-                     <tr>
-
-						<td colspan="2"><center><h4>Forgot Password</h4></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="2"><input type="email" id="emailForForgotPwd" placeholder="Email Id" size="39" /></td>
-
-					</tr>
-
-					<tr><td id="ttt3" style="display:none" colspan="2"></td></tr>
-
-					<tr>
-
-						<td colspan="2"><center><button id="btnForgotPwd" class="blue large" onclick="validateBeforeForgotPwd('FORGOTPWD','ttt3')"> <i class="icon-chevron-right"></i> Email My Password</button></center></td>
-
-					</tr>
-
-					<tr>
-
-						<td><center><button id="btnBackToLoginFromSignUp" class="blue" onclick="backToLogin()" > Login</button></center></td>
-
-                        <td><center><button id="btnSignUp" class="blue" onclick="showSignUpForm()">Sign Up</button></center></td>
-
-					</tr>
-
-				</table>
-
-		</div>
-
-	</div>
-
-        
-
-        
-
-    </body>
-
-</html>
-
+<!DOCTYPE HTML>
+<!-- saved from url=(0038)http://www.sandhaan.com/e2h/index.html -->
+<HTML><HEAD><TITLE>स्लेट (SLATE) - one of the fastest & intutive phonetic hindi typing tool</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=unicode"><LINK 
+href="languages.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="hindi.js"></script>
+<script type="text/javascript" src="converter.js"></script>
+
+<META content="MSHTML 6.00.2900.3132" name=GENERATOR><!-- start : script for autocomplete --><!-- WICK STEP 1: INSERT CSS --><LINK 
+href="slate_files/wick.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript type=text/javascript>
+function checkForm() {
+answer = true;
+if (siw && siw.selectingSomething)
+	answer = false;
+return answer;
+}//
+</SCRIPT>
+
+<SCRIPT>
+function moveSIW(direction) {
+	if (direction=='up' & y >= 100) { y += -50; document.convarea.many_words_text.focus(); }
+	else if (direction=='down' & y <= 500) { y += 50; document.convarea.many_words_text.focus(); }
+	else if (direction=='left' & x >= 100) { x+= -50; document.convarea.many_words_text.focus(); }
+	else if (direction=='right' & x <= 800) { x += 50; document.convarea.many_words_text.focus(); }
+	else { 
+		alert('I guess you are trying to go out of screen. Please choose correct direction.'); 
+		document.convarea.many_words_text.focus(); 
+	}
+}
+</SCRIPT>
+<!-- end : script for autocomplete --></HEAD>
+<BODY>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>
+      <H2 align=left>स्लेट (SLATE) </H2></TD>
+	  <TD>
+		  <TABLE>
+			  <TBODY>
+				  <TR>
+					  <TH align=left>आखिरी चयनित शब्द एवं उसका अंग्रेजी रुपान्तरण - </TH>
+				  </TR>
+				  <TD>
+				  	<input type="text" style="FONT-SIZE: 15px; WIDTH: 100%; HEIGHT:25px" id="label_english_meaning" name="label_Dict" align=left value="not set" />
+				  </TD>
+			  </TBODY>
+		  </TABLE>
+	  </TD>
+	  
+	  <!--<TD style="FONT-ALIGN: right" width=300>Use these buttons to move 'Smart 
+      Input Box':</TD>
+    <TD align=right width=150>
+      <TABLE width="20%">
+        <TBODY>
+        <TR>
+          <TD align=right><INPUT onclick="moveSIW('left')" type=button value=left></TD>
+          <TD><INPUT onclick="moveSIW('up')" type=button value=" up "><BR><INPUT onclick="moveSIW('down')" type=button value=down></TD>
+          <TD align=left><INPUT onclick="moveSIW('right')" type=button value=right></TD></TR></TBODY></TABLE></TD>--></TR></TBODY></TABLE>
+    <FORM name=convarea onsubmit="return checkForm()">
+        <TABLE>
+            <TBODY>
+                <TR>
+                    <TH align=left>यहां टाइप करे...</TH>
+                    <TH align=left>हिन्दी रुपान्तरण...</TH>
+                </TR>    
+                <TR>
+                    <TD align=top>
+                        <TEXTAREA class=wickEnabled onkeyup=javascript:print_many_words() style="FONT-SIZE: 11px; WIDTH: 100%; HEIGHT: 200px" onfocus=javascript:print_many_words() name=many_words_text rows=15>abhyAsa</TEXTAREA>
+                        
+                    </TD>
+                    <TD>
+                        <TEXTAREA style="FONT-SIZE: 12px; WIDTH: 100%; HEIGHT: 200px" name=converted_text rows=35></TEXTAREA> 
+                    </TD>
+                </TR>
+                <!--<TR>
+                    <TD colSpan=2>
+                        <TEXTAREA style="WIDTH: 100%; HEIGHT: 75px" name=html_text rows=5 readOnly cols=80></TEXTAREA> 
+                    </TD>
+                </TR>-->
+            </TBODY>
+        </TABLE>
+        <br>
+        <table id="smartInputFloater" class="floater" style="FONT-SIZE: 14px; WIDTH: 20%;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="smartInputFloaterContent" nowrap="nowrap"></td>
+            </tr>
+        </table>
+    </FORM>
+<!--<TABLE>
+  <FORM name=convarea onsubmit="return checkForm()">
+  <TBODY>
+  <TR>
+    <TH align=left>यहां टाइप करे...</TH>
+    <TH align=left>हिन्दी रुपान्तरण...</TH>
+  <TR>
+    <TD><TEXTAREA class=wickEnabled onkeyup=javascript:print_many_words() style="FONT-SIZE: 11px; WIDTH: 100%; HEIGHT: 200px" onfocus=javascript:print_many_words() name=many_words_text rows=15>abhyAsa</TEXTAREA> 
+    </TD>
+    <TD><TEXTAREA style="FONT-SIZE: 12px; WIDTH: 100%; HEIGHT: 200px" name=converted_text rows=35></TEXTAREA> 
+    </TD></TR>
+  <TR>
+    <TH colSpan=2>Equivalent HTML text</TH>
+  <TR>
+    <TD colSpan=2><TEXTAREA style="WIDTH: 100%; HEIGHT: 75px" name=html_text rows=5 readOnly cols=80></TEXTAREA> 
+    </TD>
+  </TR>
+    </TBODY></FORM></TABLE>-->
+<DIV class=mga id=wickStatus>Loading ... please hold! </DIV><BR><!--<FORM onsubmit="return checkForm()">
+ WICK STEP 4: ADD "wickEnabled" attribute to input
+that'll receive autocompletion using data stored in the "collection" array defined in STEP 2 -/-><BR>My 
+Third Box:<BR><TEXTAREA class=wickEnabled rows=3 wrap=virtual cols=50></TEXTAREA> 
+<BR>&nbsp;<BR></FORM>
+
+<A href="http://www.iit.edu/~laksvij/language/index.html">Back to the Indian 
+Language Converter</A> 
+-->
+<TABLE>
+  <TBODY>
+  <TR></TR></TBODY></TABLE>
+<TABLE borderColor=#cc99ff cellSpacing=0 cellPadding=0 border=1>
+  <TBODY style="FONT-SIZE: 10pt">
+  <TR>
+    <TH colSpan=50>स्वर (Vowels)</TH>
+  <TR>
+    <TD>a 
+    <TD class=mg>अ 
+    <TD>A, aa 
+    <TD class=mg>आ 
+    <TD>i 
+    <TD class=mg>इ 
+    <TD>I, ee 
+    <TD class=mg>ई 
+    <TD>u 
+    <TD class=mg>उ 
+    <TD>U, oo 
+    <TD class=mg>ऊ 
+    <TD>tR 
+    <TD class=mg>ऋ 
+    <TD>En 
+    <TD class=mg>ऍ 
+    <TD>e 
+    <TD class=mg>ए 
+    <TD>ai 
+    <TD class=mg>ऐ 
+    <TD>Ao 
+    <TD class=mg>ऑ 
+    <TD>o 
+    <TD class=mg>ओ 
+    <TD>au 
+    <TD class=mg>औ 
+    <TD>TR 
+    <TD class=mg>ॠ 
+    <TD>AOM 
+    <TD class=mg>ॐ 
+    <TD>AO 
+    <TD class=mg>अँ 
+    <TD>M 
+    <TD class=mg>अं 
+    <TD>H, : 
+    <TD class=mg>अः 
+    <TD>aA 
+    <TD class=mg>अऽ 
+    <TD>| 
+    <TD class=mg>। 
+    <TD>|| 
+    <TD class=mg>॥ </TD></TR></TBODY></TABLE></TR><TR>
+<TABLE borderColor=#cc99ff cellSpacing=0 cellPadding=0 border=1>
+  <TBODY style="FONT-SIZE: 10pt">
+  <TR>
+    <TH colSpan=50>व्यंजन (Consonants)</TH>
+  <TR>
+    <TD>k 
+    <TD class=mg>क 
+    <TD>kh 
+    <TD class=mg>ख 
+    <TD>g 
+    <TD class=mg>ग 
+    <TD>gh 
+    <TD class=mg>घ 
+    <TD>G 
+    <TD class=mg>ङ 
+    <TD>ch 
+    <TD class=mg>च 
+    <TD>Ch 
+    <TD class=mg>छ 
+    <TD>j 
+    <TD class=mg>ज 
+    <TD>jh 
+    <TD class=mg>झ 
+    <TD>nY 
+    <TD class=mg>ञ 
+    <TD>t 
+    <TD class=mg>ट 
+    <TD>T 
+    <TD class=mg>ठ 
+    <TD>d 
+    <TD class=mg>ड 
+    <TD>D 
+    <TD class=mg>ढ 
+    <TD>N 
+    <TD class=mg>ण 
+    <TD>th 
+    <TD class=mg>त 
+    <TD>Th 
+    <TD class=mg>थ 
+    <TD>dh 
+    <TD class=mg>द 
+    <TD>Dh 
+    <TD class=mg>ध 
+    <TD>n 
+    <TD class=mg>न 
+    <TD>p 
+    <TD class=mg>प 
+    <TD>ph 
+    <TD class=mg>फ 
+    <TD>b 
+    <TD class=mg>ब 
+    <TD>bh, B
+    <TD class=mg>भ 
+    <TD>m 
+    <TD class=mg>म 
+  <TR>
+    <TD>y 
+    <TD class=mg>य 
+    <TD>r 
+    <TD class=mg>र 
+    <TD>l 
+    <TD class=mg>ल 
+    <TD>v 
+    <TD class=mg>व 
+    <TD>sh 
+    <TD class=mg>श 
+    <TD>Sh 
+    <TD class=mg>ष 
+    <TD>s 
+    <TD class=mg>स 
+    <TD>h 
+    <TD class=mg>ह 
+    <TD>kSh 
+    <TD class=mg>क्ष 
+    <TD>thr 
+    <TD class=mg>त्र 
+    <TD>jnY 
+    <TD class=mg>ज्ञ 
+  <TR></TR></TBODY></TABLE></TR><TR>
+<TABLE borderColor=#cc99ff cellSpacing=0 cellPadding=0 border=1>
+  <TBODY style="FONT-SIZE: 10pt">
+  <TR>
+    <TH colSpan=50>अन्य अक्षर (Other letters)</TH>
+  <TR>
+    <TD>q 
+    <TD class=mg>क़ 
+    <TD>qh 
+    <TD class=mg>ख़ 
+    <TD>gG 
+    <TD class=mg>ग़ 
+    <TD>z 
+    <TD class=mg>ज़ 
+    <TD>DdD 
+    <TD class=mg>ड़ 
+    <TD>RrR 
+    <TD class=mg>ढ़ 
+    <TD>f 
+    <TD class=mg>फ़ 
+    <TD>Y 
+    <TD class=mg>य़ 
+    <TD>NnN 
+    <TD class=mg>ऩ 
+    <TD>R 
+    <TD class=mg>ऱ 
+    <TD>LlL 
+    <TD class=mg>ऴ 
+    <TD>L 
+    <TD class=mg>ळ </TD></TR></TBODY></TABLE></TR><TR>
+<TABLE borderColor=#cc99ff cellSpacing=0 cellPadding=0 border=1>
+  <TBODY style="FONT-SIZE: 10pt">
+  <TR>
+    <TH colSpan=50>अंक (Numerals)</TH>
+  <TR>
+    <TD>1 
+    <TD class=mg>1 
+    <TD>2 
+    <TD class=mg>2 
+    <TD>3 
+    <TD class=mg>3 
+    <TD>4 
+    <TD class=mg>4 
+    <TD>5 
+    <TD class=mg>5 
+    <TD>6 
+    <TD class=mg>6 
+    <TD>7 
+    <TD class=mg>7 
+    <TD>8 
+    <TD class=mg>8 
+    <TD>9 
+    <TD class=mg>9 
+    <TD>0 
+    <TD class=mg>0 </TD></TR></TBODY></TABLE></TR></TBODY></TABLE><!--<P>I'm still searching for the ideal letter combinations to represent each 
+syllable. <BR>If you have any ideas please tell me: <A 
+href="mailto:liyer.vijay@gmail.com"><U><B>liyer.vijay@gmail.com</B></U></A> 
+<P>For instance, I don't know if the letter combinations "kaaAO" or "kAAO" are 
+<BR>intuitive enough to write काँ. Since I am neither a native speaker nor 
+writer of <BR>Hindi, I look forward to feedback from people who write Hindi 
+often. 
+<P>The same applies to the other language pages also. If you can suggest an 
+<BR>improvement to any letter combination in any page, tell me. 
+<P>The goal is to make writing in each language as intuitive as possible. 
+<P>The code this site uses is <A 
+href="http://www.iit.edu/~laksvij/language/ilc.zip">here.</A> It is <A 
+href="http://www.gnu.org/copyleft/gpl.html">free</A> for use. </P>
+-->
+<SCRIPT language=JavaScript src="sample_data.js" 
+type=text/javascript></SCRIPT>
+<!-- WICK STEP 2: DEFINE COLLECTION ARRAY THAT HOLDS DATA -->
+<SCRIPT language=JavaScript src="wick.js" 
+type=text/javascript></SCRIPT>
+<!-- WICK STEP 3: INSERT WICK LOGIC -->
+<SCRIPT>
+//document.getElementById("wickStatus").innerHTML = '<a target="_blank" href="https://www.sandhaan.com/e3h/WICK Testing Ground_files/sample_data.js">Loaded <b>' + collection.length + '</b> hindi words</a>';
+document.getElementById("wickStatus").innerHTML = 'Loaded <b>' + collection.length + '</b> hindi words for autocomplete and hindi-english dictionary';
+</SCRIPT>
+</BODY></HTML>
