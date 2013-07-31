@@ -1,0 +1,72 @@
+BODY {
+  COLOR: black; BORDER-TOP-STYLE: none; FONT-FAMILY: "Times New Roman", serif; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BACKGROUND-COLOR: white; BORDER-BOTTOM-STYLE: none
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+H4 {
+	FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+H1 {
+	FONT-SIZE: 200%; TEXT-ALIGN: center
+}
+H2 {
+	FONT-SIZE: 130%
+}
+H3 {
+	FONT-SIZE: 120%
+}
+H4 {
+	FONT-SIZE: 80%
+}
+P {
+	FONT-SIZE: 100%
+}
+P.small {
+	FONT-SIZE: 70%; TEXT-ALIGN: center
+}
+P.important {
+	COLOR: red
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; LIST-STYLE-POSITION: inside; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+LI.inline {
+	DISPLAY: inline
+}
+TABLE {
+	TABLE-LAYOUT: fixed; VERTICAL-ALIGN: top; WIDTH: 100%; HEIGHT: auto
+}
+TH {
+	BACKGROUND-COLOR: #cc99ff
+}
+TD {
+	MARGIN-TOP: 5px; MARGIN-LEFT: 5px; TEXT-ALIGN: center
+}
+TABLE.sub {
+	BORDER-RIGHT: #888888 2px solid; BORDER-TOP: #888888 2px solid; BORDER-LEFT: #888888 2px solid; BORDER-BOTTOM: #888888 2px solid
+}
+.mg {
+	FONT-SIZE: 10pt; BACKGROUND-COLOR: #ffbc79; TEXT-ALIGN: center
+}
+.mga {
+	FONT-SIZE: 10pt; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+A {
+	COLOR: blue; BACKGROUND-COLOR: transparent
+}
+A.language {
+	TEXT-DECORATION: none
+}
+A:visited {
+	
+}
+A:hover {
+	COLOR: red
+}
